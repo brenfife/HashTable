@@ -2,12 +2,12 @@
 // 
 // Project:          HashTable with Performance Analysis
 // Files:            HashTableADT.java
-//					 HashTable.java
-// 					 PerformanceAnalysis.java
-//					 PerformanceAnalysisHash.java
-//					 AnalysisTest.java
+//		     HashTable.java
+// 		     PerformanceAnalysis.java
+//		     PerformanceAnalysisHash.java
+//		     AnalysisTest.java
 // Semester:         CS400 Spring 2018
-// Author(s):		 Brennan Fife, Dustin Li
+// Author(s):	     Brennan Fife, Dustin Li
 // Instructor:       Deb Deppeler 
 // Bugs:             No known bugs
 //
@@ -15,20 +15,35 @@
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 public class HashTable<K, V> implements HashTableADT<K, V> {
     /* Instance variables and constructors
      */
-	HashT<T<K, V>>[] hashTable;
-	private int size = 1000;//given
-	final private double loadFactor = 0.	;	//choose our load factor
-	final private int hashes = 0; //number of current items
-	
-	public HashTable() {
-		hashTable = new HashT[size];
-		for (int i = 0; i < size; i++) {
-			hashTable[i] = new HashT(); 
+	protected class HashNode<K, V> {
+		private K k;
+		private V v;
+		private HashNode<K, V> link;
+		
+		public HashNode(K k, V v) { //CONSTRUCTOR
+			this.k = k;
+			this.v = v;
 		}
+	}
+	private ArrayList<HashNode<K, V>> buckets;
+	private int tableSize;//capacity of HashTable 
+	private double loadFactor;	//maximum load factor of HashTable 
+	private int num = 0 ; //number of current items inside HashTable
+	
+	public HashTable(int initialCapacity, double loadFactor) {
+		this.loadFactor = loadFactor;
+		this.tableSize = initialCapacity;
+		buckets = new ArrayList<HashNode<K, V>>();
+		for (int i = 0; i < tableSize; i++) {
+			buckets.add(null);
+		}
+		
 	}
 
 	public class HashT<List> {
@@ -39,25 +54,14 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		}
 	}
 	
-	public class List <K, V> {
-		public final K, k;
-		public final V, v;
-		public List (K k, V v) {
-			this.k = k;
-			this.v = v;
-		}
-	}
-	
     @Override
     public V put(K key, V value) {
-        int hashValue = getHashValue(key);
-        HashT<List<K, V>> //TODO: Implement put method - using efficient algorithm
-        for()return null;
+    	//TODO: Implement put method - using efficient algorithm
+        return null;
     }
 
     @Override
     public void clear() {
-       table = new 
     }
 
     @Override
@@ -68,7 +72,7 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 
     @Override
     public boolean isEmpty() {
-        return numI == 0;
+        return true;
     }
 
     @Override
@@ -79,7 +83,6 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 
     @Override
     public int size() {
-        //TODO: Implement this method
-        return 0;
+        return tableSize;
     }
 }
