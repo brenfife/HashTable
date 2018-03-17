@@ -2,12 +2,12 @@
 // 
 // Project:          HashTable with Performance Analysis
 // Files:            HashTableADT.java
-//		     HashTable.java
-// 		     PerformanceAnalysis.java
-//		     PerformanceAnalysisHash.java
-//		     AnalysisTest.java
+//					 HashTable.java
+// 					 PerformanceAnalysis.java
+//					 PerformanceAnalysisHash.java
+//					 AnalysisTest.java
 // Semester:         CS400 Spring 2018
-// Author(s):	     Brennan Fife, Dustin Li
+// Author(s):		 Brennan Fife, Dustin Li
 // Instructor:       Deb Deppeler 
 // Bugs:             No known bugs
 //
@@ -34,7 +34,7 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	private ArrayList<HashNode<K, V>> buckets;
 	private int tableSize;//capacity of HashTable 
 	private double loadFactor;	//maximum load factor of HashTable 
-	private int num = 0 ; //number of current items inside HashTable
+	private int num; //number of current items inside HashTable
 	
 	public HashTable(int initialCapacity, double loadFactor) {
 		this.loadFactor = loadFactor;
@@ -42,16 +42,7 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		buckets = new ArrayList<HashNode<K, V>>();
 		for (int i = 0; i < tableSize; i++) {
 			buckets.add(null);
-		}
-		
-	}
-
-	public class HashT<List> {
-		public ArrayList<List> num;
-		//Constructor
-		public HashT() {
-			num = new ArrayList<>();
-		}
+		}	
 	}
 	
     @Override
@@ -72,7 +63,7 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 
     @Override
     public boolean isEmpty() {
-        return true;
+    if num == 0 : return true;
     }
 
     @Override
