@@ -46,7 +46,7 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	}
 	
     @Override
-    public V put(K key, V value) {
+    public V put(K key, V value) { //check for null
     	//TODO: Implement put method - using efficient algorithm
         return null;
     }
@@ -56,14 +56,14 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
     }
 
     @Override
-    public V get(K key) {
+    public V get(K key) { //check for null key)
         //TODO: Implement the get method
         return null;
     }
 
     @Override
     public boolean isEmpty() {
-    if num == 0 : return true;
+    	return numItems == 0 ? true : false; 
     }
 
     @Override
