@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // 
 // Project:          HashTable with Performance Analysis
@@ -20,30 +19,33 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
+/**
+ * HashTable Implementation.
+ * @param K Key of hashed value
+ * @param V Value of associated key
+ */
 public class HashTable<K, V> implements HashTableADT<K, V> {
-    /* Instance variables and constructors
+    /* Initial instance variables and constructors for setup
      */
-	protected class HashNode<K, V> { //Initial setup
+	protected class HashNode<K, V> { 
 		private K k;
 		private V v;
 		private HashNode<K, V> next;
 		
-		public HashNode(K k, V v) { //CONSTRUCTOR
+		public HashNode(K k, V v) { 
 			this.k = k;
 			this.v = v;
 		}
 	}
 	private HashNode<K, V>[] table;
-	private int tableSize = 7;		//capacity of HashTable. Want a prime number 
-	private double loadFactor = 0.8;	//maximum load factor of HashTable. Between .6 and .8.
+	private int tableSize = 7;		//capacity of HashTable. Want a prime number here
+	private double loadFactor = 0.8;	//maximum load factor of HashTable.
 	private int num; 			//number of current items inside HashTable
 	
-	
     /**
-     * Constructor to that will set our hashtable's array to size
-     * initialCapacity. 
+     * Constructor to that will set hashtable's array to size of initialCapacity. 
      * @param initialCapacity Initial capacity of table
-     * @param loadFactor Initial Load factor
+     * @param loadFactor Initial load factor
      */
 	public HashTable(int initialCapacity, double loadFactor) {
 		this.loadFactor = loadFactor;
@@ -55,10 +57,9 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 	}
    /**
     * @key key of desired hashCode.
-    * @hashNum Returned hashNum
+    * @hashNum Returned hashcode of key
     */
-    private int getHashNum(K key)
-    {
+    private int getHashNum(K key) {
     		int hashCode = key.hashCode();
     		int hashNum = hashCode % tableSize;
     		return hashNum;
@@ -67,20 +68,17 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
    /**
     * Resizes hashtable when needed.
     */
-    private void resize()
-    {
-    		double loadFactor = (num/tableSize);
-    		if (loadFactor > this.loadFactor)
-    		{
-    			int newSize = tableSize * 2;
-    			tableSize = newSize;
-    			HashNode<K, V>[] newTable = new HashNode[newSize];
-    			for (int i = 0; i < tableSize; i++)
-    			{
-    				newTable[i] = table[i];
-    				table = newTable;
-    			}
+	private void resize() {
+    	double loadFactor = (num/tableSize);
+    		if (loadFactor > this.loadFactor) {
+    		int newSize = tableSize * 2;
+    		tableSize = newSize;
+    		HashNode<K, V>[] newTable = new HashNode[newSize];
+    		for (int i = 0; i < tableSize; i++) {
+    			newTable[i] = table[i];
+    			table = newTable;
     		}
+    	}
     }
     
     /**
@@ -93,21 +91,17 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
      */
     @Override
     public V put(K key, V value) { 
-    		if (key == null || get(key) != null)
-    		{
+    		if (key == null || get(key) != null) {
     			throw new IllegalArgumentException("Invalid Key");
     		}
-    		else
-    		{
+    		else {
     			int hashValue = getHashNum(key);
-			if (table[hashValue] == null)
-			{
+			if (table[hashValue] == null) {
 				table[hashValue] = new HashNode<>(key, value);
 				num++;
 				resize();
 			}
-			else
-			{
+			else {
 				HashNode<K, V> temp = table[hashValue];
 				temp.next = new HashNode<K, V>(key, value);
 				table[hashValue] = temp;
