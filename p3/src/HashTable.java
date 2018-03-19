@@ -3,13 +3,14 @@
 // 
 // Project:          HashTable with Performance Analysis
 // Files:            HashTableADT.java
-//					 HashTable.java
-// 					 PerformanceAnalysis.java
-//					 PerformanceAnalysisHash.java
-//					 AnalysisTest.java
+//		     HashTable.java
+// 		     PerformanceAnalysis.java
+//		     PerformanceAnalysisHash.java
+//		     AnalysisTest.java
 // Semester:         CS400 Spring 2018
-// Author(s):		 Brennan Fife, Dustin Li
+// Author(s):	     Brennan Fife, Dustin Li
 // Instructor:       Deb Deppeler 
+// Due Date:         3/19/2018
 // Bugs:             No known bugs
 //
 //////////////////////////// 80 columns wide //////////////////////////////////
@@ -22,7 +23,7 @@ import java.util.NoSuchElementException;
 public class HashTable<K, V> implements HashTableADT<K, V> {
     /* Instance variables and constructors
      */
-	protected class HashNode<K, V> {
+	protected class HashNode<K, V> { //Initial setup
 		private K k;
 		private V v;
 		private HashNode<K, V> next;
@@ -33,10 +34,17 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 		}
 	}
 	private HashNode<K, V>[] table;
-	private int tableSize = 7;//capacity of HashTable 
-	private double loadFactor = 0.8;	//maximum load factor of HashTable 
-	private int num; //number of current items inside HashTable
+	private int tableSize = 7;		//capacity of HashTable. Want a prime number 
+	private double loadFactor = 0.8;	//maximum load factor of HashTable. Between .6 and .8.
+	private int num; 			//number of current items inside HashTable
 	
+	
+    /**
+     * Constructor to that will set our hashtable's array to size
+     * initialCapacity. 
+     * @param initialCapacity Initial capacity of table
+     * @param loadFactor Initial Load factor
+     */
 	public HashTable(int initialCapacity, double loadFactor) {
 		this.loadFactor = loadFactor;
 		this.tableSize = initialCapacity;
@@ -45,14 +53,20 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 			table[i] = null;
 		}	
 	}
-
+   /**
+    * @key key of desired hashCode.
+    * @hashNum Returned hashNum
+    */
     private int getHashNum(K key)
     {
     		int hashCode = key.hashCode();
     		int hashNum = hashCode % tableSize;
     		return hashNum;
     }
-    
+	
+   /**
+    * Resizes hashtable when needed.
+    */
     private void resize()
     {
     		double loadFactor = (num/tableSize);
@@ -69,9 +83,16 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
     		}
     }
     
+    /**
+     * Checks if value is valid to be inserted. 
+     * Properly insert into table. Resize when needed. 
+     * @param key The key being inserted into the hashtable
+     * @param value The value from the key
+     * @throws  IllegalArgumentException with invalid key
+     * @return value
+     */
     @Override
-    public V put(K key, V value) { //check for null
-    	//TODO: Implement put method - using efficient algorithm
+    public V put(K key, V value) { 
     		if (key == null || get(key) != null)
     		{
     			throw new IllegalArgumentException("Invalid Key");
@@ -96,91 +117,92 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
     		}
 		return value;
     }
-
+   /**
+    * Clears hashtable
+    */
     @Override
     public void clear() {
     		table = new HashNode[tableSize];
     		num = 0;
     }
-
+    /**
+     * Gets value associated with the key from the Hash Table
+     * @param key Value is to be returned.
+     * @return returns the value associated with the key. Otherwise will return null if key DNE.
+     * @throws IllegalArgumentException When invalid input is given
+     */
     @Override
-    public V get(K key) { //check for null key)
-        //TODO: Implement the get method
-        if (key == null)
-        {
-        		throw new IllegalArgumentException();
-        }
-    		for (int i = 0; i < tableSize; i++)
-        {
-        		if (table[i].k.equals(key))
-        		{
-        			return table[i].v;
-        		}
-        		else 
-        		{
-        			HashNode<K, V> temp = table[i].next;
-        			while(temp != null)
-        			{
-        				if (temp.k.equals(key))
-        				{
-        					return temp.v;
-        				}
-        				else
-        				{
-        					temp = temp.next;
-        				}
+    public V get(K key) { 
+	    if (key == null) {
+        	throw new IllegalArgumentException();
+            }
+    	    for (int i = 0; i < tableSize; i++) {
+        	if (table[i].k.equals(key)) {
+        		return table[i].v;
+        	}
+        	else {
+        		HashNode<K, V> temp = table[i].next;
+        		while(temp != null) {
+        			if (temp.k.equals(key)) {
+        				return temp.v;
+        			}
+        			else {
+        				temp = temp.next;
         			}
         		}
-        }
+        	}
+        	}
         return null;
     }
-
+	
+   /**
+    * Checks if empty
+    * @return True if empty
+    */
     @Override
-    public boolean isEmpty() 
-    {
-    		return num == 0; 
+    public boolean isEmpty() {
+    	return num == 0; 
     }
-
+	
+   /**
+    * @param key The entry looking to be removed
+    * @return returns the value looking to be removed.
+    * @throws IllegalArgumentException if the key looking to be removed DNE.
+    */
     @Override
-    public V remove(K key) {
-       //TODO: Implement the remove method
-        if (key == null || get(key) == null)
-        {
+	public V remove(K key) {
+        	if (key == null || get(key) == null) {
         		throw new IllegalArgumentException();
-        }
-        int hashValue = getHashNum(key);
-        if (table[hashValue].k.equals(key))
-        {
+        	}
+        	int hashValue = getHashNum(key);
+        	if (table[hashValue].k.equals(key)) {
         		V ret = table[hashValue].v;
         		table[hashValue] = table[hashValue].next;
         		return ret;
-        }
-        else
-        {
-        		
+        	}
+        	else {
         		HashNode<K, V> prev = null;
         		HashNode<K, V> curr = table[hashValue];
         		prev.next = curr;
-        		while (curr.next != null)
-        		{
-        			if (curr.k.equals(key))
-        			{
+        		while (curr.next != null) {
+        			if (curr.k.equals(key)) {
         				prev.next = curr.next;
         				return curr.v;
         			}
-        			else 
-        			{
+        			else {
         				prev = curr;
         				curr = curr.next;
         			}
         		}
-        }
-		return null; 
+		}
+	return null; 
     }
-
+	
+   /**
+    * @return Returns the tableSize, which is the total number of entries in the hashtable
+    */
     @Override
-    public int size() 
-    {
+    public int size() {
         return tableSize;
     }
 }
