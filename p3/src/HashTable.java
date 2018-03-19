@@ -55,6 +55,11 @@ public class HashTable<K, V> implements HashTableADT<K, V> {
 			table[i] = null;
 		}	
 	}
+	
+	public HashTable()
+	{
+		this(7,0.8);		
+	}
    /**
     * @key key of desired hashCode.
     * @hashNum Returned hashcode of key
