@@ -124,7 +124,10 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     				hashUsedMemory) + "\n" + String.format("|%22s|%15s|%15s|%25s|%15s", fileName, "PUT", 
     				"TREE MAP", treeMapTime, treeMapUsedMemory);
     }
-
+	
+    /**
+     * Compares and prints the memory and time results of the two after an item is to be deleted. 
+     */
     @Override
     public void compareDeletion() {
         //TODO: Complete this method
@@ -154,7 +157,12 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
 				hashUsedMemory) + "\n" + String.format("|%22s|%15s|%15s|%25s|%15s", fileName, "DELETE", 
 				"TREE MAP", treeMapTime, treeMapUsedMemory);
     }
-
+	
+    /**
+     * Compares the time and memory used between table and tree map when we are search from a result. 
+     * Runs through with the given data file. Will out the given results.
+     * @see PerformanceAnalysis#compareSearch()
+     */
     @Override
     public void compareSearch() {
         //TODO: Complete this method
