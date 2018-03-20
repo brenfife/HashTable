@@ -1,0 +1,4 @@
+﻿Unable to run 
+Received:
+Invalid File
+Exception in thread "main" java.lang.NullPointerException at PerformanceAnalysisHash.compareInsertion(PerformanceAnalysisHash.java:63) at PerformanceAnalysisHash.compareDataStructures(PerformanceAnalysisHash.java: 40)at AnalysisTest.main(AnalysisTest.java:7)
