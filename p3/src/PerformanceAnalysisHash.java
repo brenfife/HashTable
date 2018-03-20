@@ -11,7 +11,8 @@
 // Author(s):	     Brennan Fife, Dustin Li
 // Instructor:       Deb Deppeler 
 // Due Date:         3/19/2018
-// Bugs:             No known bugs
+// Bugs:             Code throws a Null Pointer Exception when calling inputData.size(), 
+//		     Eclipse throws a null pointer at line 63, which was a blank space.
 //
 //////////////////////////// 80 columns wide //////////////////////////////////
 
@@ -19,6 +20,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
+/**
+* Class that compares the performance in memory and speed of a hash table to a Java tree map
+*/
 public class PerformanceAnalysisHash implements PerformanceAnalysis {
 
     // The input data from each file is stored in this/ per file
@@ -26,19 +30,26 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     private String fileName;
     private TreeMap testTree;
     private HashTable testTable;
-    private String test;
-    private String insertReport;
-    private String deleteReport;
-    private String searchReport;
-    private String printReport;
+    private String test; //test string taht represents the value
+    private String insertReport; //results of the compare insertion method
+    private String deleteReport; //results of the compare deletion method
+    private String searchReport; //results of the compare search method
+    private String printReport; //final report
     
+    /**
+    * Default constructor for the PerformanceAnalysisHash class initializes the testTree and testTable
+    */
     public PerformanceAnalysisHash()
     {
     		test = "hello";
     		testTree = new TreeMap<>();
     		testTable = new HashTable<>();
     }
-
+    
+    /**
+    * Constructor for the PerformanceAnalysisHash class that tries to read the input file and
+    * throws catches the IOException that is thrown when the filename is invalid
+    */
     public PerformanceAnalysisHash(String details_filename){
     		this();
     		fileName = details_filename;
@@ -52,6 +63,10 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     			System.out.println("Invalid File");
     		}
     }
+    
+    /**
+    * Method that calls all the compare methods and combines the reports of each method into a single string
+    */
     @Override
     public void compareDataStructures() {
         //TODO: Complete this function which compares the ds and generates the details
@@ -60,7 +75,10 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     		compareDeletion();
     		printReport = insertReport + "\n" + searchReport + "\n" + deleteReport + "\n";
     }
-
+    
+    /**
+    * Prints out the all the data from each compare method in one final report
+    */
     @Override
     public void printReport() {
         //TODO: Complete this method
@@ -72,7 +90,11 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     		System.out.println(printReport);
     		System.out.println("------------------------------------------------------------------------");
     }
-
+   
+    /**
+    * Method that compares the speed and memory used by the hash table and tree map 
+    * when running the insertion methods of each class
+    */
     @Override
     public void compareInsertion() {
         //TODO: Complete this method
