@@ -1,3 +1,20 @@
+/////////////////////////////////////////////////////////////////////////////
+// 
+// Project:          HashTable with Performance Analysis
+// Files:            PerformanceAnalysisHash.java
+//		     HashTableADT.java
+//		     HashTable.java
+// 		     PerformanceAnalysis.java
+//		     PerformanceAnalysisHash.java
+//		     AnalysisTest.java
+// Semester:         CS400 Spring 2018
+// Author(s):	     Brennan Fife, Dustin Li
+// Instructor:       Deb Deppeler 
+// Due Date:         3/19/2018
+// Bugs:             No known bugs
+//
+//////////////////////////// 80 columns wide //////////////////////////////////
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.TreeMap;
@@ -31,6 +48,7 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     		} 
     		catch (IOException e)
     		{
+    			e.printStackTrace();
     			System.out.println("Invalid File");
     		}
     }
@@ -38,9 +56,9 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
     public void compareDataStructures() {
         //TODO: Complete this function which compares the ds and generates the details
     		compareInsertion();
-    		compareDeletion();
     		compareSearch();
-    		printReport = insertReport + "\n" + deleteReport + "\n" + searchReport + "\n";
+    		compareDeletion();
+    		printReport = insertReport + "\n" + searchReport + "\n" + deleteReport + "\n";
     }
 
     @Override
