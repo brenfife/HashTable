@@ -1,8 +1,8 @@
 /////////////////////////////////////////////////////////////////////////////
 // 
 // Project:          HashTable with Performance Analysis
-// Files:            HashTableADT.java
-//		     HashTable.java
+// Files:            HashTable.java
+//		     HashTableADT.java
 // 		     PerformanceAnalysis.java
 //		     PerformanceAnalysisHash.java
 //		     AnalysisTest.java
