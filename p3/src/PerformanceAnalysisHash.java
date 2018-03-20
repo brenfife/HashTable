@@ -164,10 +164,4 @@ public class PerformanceAnalysisHash implements PerformanceAnalysis {
         }
         br.close();
     }
-    public static void main(String[] args)
-    {
-    		PerformanceAnalysisHash test = new PerformanceAnalysisHash();
-    		test.compareDataStructures();
-    		test.printReport();
-    }
 }
